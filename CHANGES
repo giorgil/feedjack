@@ -1,5 +1,9 @@
 CHANGES:
 
+Feedjack 0.9.18
+* fix finddata import error 
+  [Domen Kožar]
+
 Feedjack 0.9.17
 * put in views.something instead of using the deprecated
   simple.redirect_to. I'm certain there is a better way but this seems

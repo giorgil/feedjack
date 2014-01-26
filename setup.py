@@ -11,7 +11,7 @@ def read(*rnames):
 
 setup(
     name = 'Feedjack',
-    version = '0.9.17',
+    version = '0.9.18',
     url = 'http://www.feedjack.org/',
     author = 'Gustavo Picón',
     author_email = 'gpicon@gmail.com',
