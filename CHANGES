@@ -1,5 +1,21 @@
 CHANGES:
 
+Feedjack 0.9.17
+* put in views.something instead of using the deprecated
+  simple.redirect_to. I'm certain there is a better way but this seems
+  to work
+  [Mike Hostetler]
+
+* verify_exists was deprecated
+  [Mike Hostetler]
+
+* use hashlib instead of md5
+  [Mike Hostetler]
+
+Feedjack 0.9.16.1
+* Add product dependencies to setup.py
+  [Domen Kožar]
+
 Feedjack 0.9.16
 * Added compatibility with Django 1.0 beta 1: newforms admin and pagination
 
