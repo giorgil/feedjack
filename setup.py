@@ -4,7 +4,6 @@
 import os
 
 from setuptools import setup, find_packages
-from finddata import find_package_data
 
 
 def read(*rnames):
@@ -20,7 +19,6 @@ setup(
     maintainer_email = "domen@dev.si",
     license = 'BSD',
     packages = find_packages(),
-    package_data = find_package_data(where='feedjack', package='feedjack'),
     scripts = ['feedjack/bin/feedjack_update.py'],
     install_requires=[
       'feedparser',
