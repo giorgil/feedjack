@@ -1,12 +1,12 @@
-When the Google Reader cancellation hit on March 13, 2013, I decided to see if there was any modern feed reader to start using. It was either that or pay for something.
+NOTE:
 
-I found an old project call Feedjack -- built on Django but not updated since Django 1.0. Maybe I can get it into shape so it's usable again.
+Following is a fork of feedjack from 2005. It includes fixes to support new Django releases,
+nothing more. If someone is interested maintaining the fork with bugfixed and new features,
+let me know (or in case better django product arises).
 
-The original FeedJack page is at http://www.feedjack.org/
+Domen (domen@dev.si)
 
-What follows is the original README
-
-======================
+---
 
 Feedjack is a feed aggregator writen in Python using the Django web development
 framework.
