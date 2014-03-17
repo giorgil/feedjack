@@ -11,7 +11,7 @@ def read(*rnames):
 
 setup(
     name = 'Feedjack',
-    version = '0.9.18',
+    version = '0.9.19',
     url = 'http://www.feedjack.org/',
     author = 'Gustavo Picón',
     author_email = 'gpicon@gmail.com',
@@ -19,11 +19,14 @@ setup(
     maintainer_email = "domen@dev.si",
     license = 'BSD',
     packages = find_packages(),
-    scripts = ['feedjack/bin/feedjack_update.py'],
     install_requires=[
       'feedparser',
       'Django',
     ],
+    entry_points="""
+    [console_scripts]
+    feedjack_update = feedjack.bin.feedjack_update:main
+    """,
     zip_safe = False,
     description = 'Multisite Feed Agregator (Planet)',
     long_description = read('README.rst') + '\n\n' + read('CHANGES'),
