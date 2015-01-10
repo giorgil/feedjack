@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 fjcloud.py
 """
 
 import math
 
-from feedjack import fjlib
-from feedjack import fjcache
+from newdjack import fjlib
+from newdjack import fjcache
 
 def getsteps(levels, tagmax):
     """ Returns a list with the max number of posts per "tagcloud level"

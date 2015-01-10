@@ -2,7 +2,7 @@
 # pylint: disable-msg=W0232, R0903, W0131
 
 """
-feedjack
+newdjack
 Gustavo Picón
 models.py
 """
@@ -11,7 +11,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import smart_unicode
 
-from feedjack import fjcache
+from newdjack import fjcache
 
 SITE_ORDERBY_CHOICES = (
     (1, _('Date published.')),
@@ -34,7 +34,7 @@ class Link(models.Model):
 
 
 
-class Site(models.Model):
+class Source(models.Model):
     name = models.CharField(_('name'), max_length=100)
     url = models.CharField(_('url'),
       max_length=100,
@@ -62,7 +62,7 @@ class Site(models.Model):
       null=True, blank=True)
     template = models.CharField(_('template'), max_length=100, null=True,
       blank=True,
-      help_text=_('This template must be a directory in your feedjack '
+      help_text=_('This template must be a directory in your newdjack '
         'templates directory. Leave blank to use the default template.') )
 
     class Meta:
@@ -77,7 +77,7 @@ class Site(models.Model):
         if not self.template:
             self.template = 'default'
         # there must be only ONE default site
-        defs = Site.objects.filter(default_site=True)
+        defs = Source.objects.filter(default_site=True)
         if not defs:
             self.default_site = True
         elif self.default_site:
@@ -87,7 +87,7 @@ class Site(models.Model):
                     tdef.save()
         self.url = self.url.rstrip('/')
         fjcache.hostcache_set({})
-        super(Site, self).save()
+        super(Source, self).save()
 
 
 
@@ -167,7 +167,7 @@ class Post(models.Model):
 
 
 class Subscriber(models.Model):
-    site = models.ForeignKey(Site, verbose_name=_('site') )
+    source = models.ForeignKey(Source, verbose_name=_('site') )
     feed = models.ForeignKey(Feed, verbose_name=_('feed') )
 
     name = models.CharField(_('name'), max_length=100, null=True, blank=True,
@@ -186,11 +186,11 @@ class Subscriber(models.Model):
         unique_together = (('site', 'feed'),)
 
     def __unicode__(self):
-        return u'%s in %s' % (self.feed, self.site)
+        return u'%s in %s' % (self.feed, self.source)
 
     def get_cloud(self):
-        from feedjack import fjcloud
-        return fjcloud.getcloud(self.site, self.feed.id)
+        from newdjack import fjcloud
+        return fjcloud.getcloud(self.source, self.feed.id)
 
     def save(self):
         if not self.name:

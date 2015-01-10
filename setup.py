@@ -12,7 +12,7 @@ def read(*rnames):
 setup(
     name = 'Feedjack',
     version = '0.9.19',
-    url = 'http://www.feedjack.org/',
+    url = 'http://www.newdjack.org/',
     author = 'Gustavo Picón',
     author_email = 'gpicon@gmail.com',
     maintainer = "Domen Kozar",
@@ -25,7 +25,7 @@ setup(
     ],
     entry_points="""
     [console_scripts]
-    feedjack_update = feedjack.bin.feedjack_update:main
+    feedjack_update = newdjack.bin.feedjack_update:main
     """,
     zip_safe = False,
     description = 'Multisite Feed Agregator (Planet)',

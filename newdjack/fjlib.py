@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 fjlib.py
 """
@@ -12,8 +12,8 @@ from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
 from django.utils.encoding import smart_unicode
 
-from feedjack import models
-from feedjack import fjcache
+from newdjack import models
+from newdjack import fjcache
 
 
 # this is taken from django, it was removed in r8191
@@ -124,7 +124,7 @@ def get_extra_content(site, sfeeds_ids, ctx):
         ctx['feeds'] = []
         ctx['last_modified'] = '??'
     ctx['site'] = site
-    ctx['media_url'] = '%s/feedjack/%s' % (settings.MEDIA_URL, site.template)
+    ctx['media_url'] = '%s/newdjack/%s' % (settings.MEDIA_URL, site.template)
 
 def get_posts_tags(object_list, sfeeds_obj, user_id, tag_name):
     """ Adds a qtags property in every post object in a page.
@@ -181,7 +181,7 @@ def getcurrentsite(http_post, path_info, query_string):
         hostdict = {}
     if url not in hostdict:
         default, ret = None, None
-        for site in models.Site.objects.all():
+        for site in models.Source.objects.all():
             if url.startswith(site.url):
                 ret = site
                 break
@@ -193,10 +193,10 @@ def getcurrentsite(http_post, path_info, query_string):
             else:
                 # Somebody is requesting something, but the user didn't create
                 # a site yet. Creating a default one...
-                ret = models.Site(name='Default Feedjack Site/Planet', \
-                  url='www.feedjack.org', \
-                  title='Feedjack Site Title', \
-                  description='Feedjack Site Description. ' \
+                ret = models.Source(name='Default Feedjack Source/Planet', \
+                  url='www.newdjack.org', \
+                  title='Feedjack Source Title', \
+                  description='Feedjack Source Description. ' \
                     'Please change this in the admin interface.')
                 ret.save()
         hostdict[url] = ret.id
@@ -270,7 +270,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
         'hits' : paginator.hits,
     }
     get_extra_content(site, sfeeds_ids, ctx)
-    from feedjack import fjcloud
+    from newdjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)
     ctx['user_id'] = user_id
     ctx['user'] = user_obj

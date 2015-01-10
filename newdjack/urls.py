@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 urls.py
 """
 
 from django.conf.urls.defaults import patterns
 
-from feedjack import views
+from newdjack import views
 
 
 

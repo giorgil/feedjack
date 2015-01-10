@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 __init__.py
 """

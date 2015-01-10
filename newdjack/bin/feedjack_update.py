@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 update_feeds.py
 """
@@ -23,7 +23,7 @@ except ImportError:
     threadpool = None
 
 VERSION = '0.9.16'
-URL = 'http://www.feedjack.org/'
+URL = 'http://www.newdjack.org/'
 USER_AGENT = 'Feedjack %s - %s' % (VERSION, URL)
 SLOWFEED_WARNING = 10
 ENTRY_NEW, ENTRY_UPDATED, ENTRY_SAME, ENTRY_ERR = range(4)
@@ -65,7 +65,7 @@ class ProcessEntry:
     def get_tags(self):
         """ Returns a list of tag objects from an entry.
         """
-        from feedjack import models
+        from newdjack import models
 
         fcat = []
         if self.entry.has_key('tags'):
@@ -137,7 +137,7 @@ class ProcessEntry:
     def process(self):
         """ Process a post in a feed and saves it in the DB if necessary.
         """
-        from feedjack import models
+        from newdjack import models
 
         (link, title, guid, author, author_email, content, date_modified,
          fcat, comments) = self.get_entry_data()
@@ -221,7 +221,7 @@ class ProcessFeed:
     def process(self):
         """ Downloads and parses a feed.
         """
-        from feedjack import models
+        from newdjack import models
 
         ret_values = {
             ENTRY_NEW:0,
@@ -455,7 +455,7 @@ def main():
         os.environ["DJANGO_SETTINGS_MODULE"] = options.settings
 
 
-    from feedjack import models, fjcache
+    from newdjack import models, fjcache
 
     # settting socket timeout (default= 10 seconds)
     socket.setdefaulttimeout(options.timeout)
@@ -476,8 +476,8 @@ def main():
                 prints('! Unknown feed id: %d' % (feed,))
     elif options.site:
         try:
-            site = models.Site.objects.get(pk=int(options.site))
-        except models.Site.DoesNotExist:
+            site = models.Source.objects.get(pk=int(options.site))
+        except models.Source.DoesNotExist:
             site = None
             prints('! Unknown site id: %d' % (options.site,))
         if site:
@@ -492,7 +492,7 @@ def main():
 
     # removing the cached data in all sites, this will only work with the
     # memcached, db and file backends
-    [fjcache.cache_delsite(site.id) for site in models.Site.objects.all()]
+    [fjcache.cache_delsite(site.id) for site in models.Source.objects.all()]
 
     if threadpool:
         tcom = u'%d threads' % (options.workerthreads,)

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 admin.py
 """
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _ 
-from feedjack import models
+from newdjack import models
 
 
 class LinkAdmin(admin.ModelAdmin):
@@ -52,7 +52,7 @@ class SubscriberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Link, LinkAdmin)
-admin.site.register(models.Site, SiteAdmin)
+admin.site.register(models.Source, SiteAdmin)
 admin.site.register(models.Feed, FeedAdmin)
 admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.Subscriber, SubscriberAdmin)

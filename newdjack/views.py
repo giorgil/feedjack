@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 views.py
 """
@@ -13,9 +13,9 @@ from django.http import HttpResponse
 from django.utils.cache import patch_vary_headers
 from django.template import Context, loader
 
-from feedjack import models
-from feedjack import fjlib
-from feedjack import fjcache
+from newdjack import models
+from newdjack import fjlib
+from newdjack import fjcache
 
 def initview(request):
     """ Retrieves the basic data needed by all feeds (host, feeds, etc)
@@ -35,7 +35,7 @@ def initview(request):
     if response:
         return response, None, cachekey, [], []
 
-    site = models.Site.objects.get(pk=site_id)
+    site = models.Source.objects.get(pk=site_id)
     sfeeds_obj = fjlib.sitefeeds(site)
     sfeeds_ids = [subscriber.feed.id for subscriber in sfeeds_obj]
 
@@ -51,13 +51,13 @@ def blogroll(request, btype):
 
     # for some reason this isn't working:
     #
-    #response = render_to_response('feedjack/%s.xml' % btype, \
+    #response = render_to_response('newdjack/%s.xml' % btype, \
     #  fjlib.get_extra_content(site, sfeeds_ids))
     #response.mimetype = 'text/xml; charset=utf-8'
     #
     # so we must use this:
 
-    template = loader.get_template('feedjack/%s.xml' % btype)
+    template = loader.get_template('newdjack/%s.xml' % btype)
     ctx = {}
     fjlib.get_extra_content(site, sfeeds_ids, ctx)
     ctx = Context(ctx)
@@ -139,7 +139,7 @@ def mainview(request, tag=None, user=None):
     ctx = fjlib.page_context(request, site, tag, user, (sfeeds_obj, \
       sfeeds_ids))
 
-    response = render_to_response('feedjack/%s/post_list.html' % \
+    response = render_to_response('newdjack/%s/post_list.html' % \
       (site.template), ctx)
     
     # per host caching, in case the cache middleware is enabled

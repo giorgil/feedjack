@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-feedjack
+newdjack
 Gustavo Picón
 fjcache.py
 """
@@ -28,7 +28,7 @@ def str2md5(key):
 def getkey(stype, site_id=None, key=None):
     """ Returns the cache key depending on it's type.
     """
-    base = '%s.feedjack' % (settings.CACHE_MIDDLEWARE_KEY_PREFIX)
+    base = '%s.newdjack' % (settings.CACHE_MIDDLEWARE_KEY_PREFIX)
     if stype == T_HOST:
         return '%s.hostcache' % base
     elif stype == T_ITEM:
